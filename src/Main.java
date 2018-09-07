@@ -59,6 +59,8 @@ public class Main {
                 dices.show(); // show the dices that have been rolled
 
                 currentPlayer.setRoll(rolls++); // increment rolls
+
+                dices.holdDices();
             }
         }
     }
@@ -92,6 +94,8 @@ public class Main {
 
     // Get users names input
     static void getPlayersName(List<Player> players) {
+
+        out.println();
 
         for (Player player: players) {
             out.print("Player " + (player.getId()+1) + ", enter your name: ");

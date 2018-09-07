@@ -173,11 +173,37 @@ public class Dices {
         out.println("\n");
     }
 
+    // Drop the dices: stop keeping them and allow them to be rolled
+    public void holdDices() {
+
+        out.print("Enter the dices you want to hold (separated by comma): ");
+
+        Scanner kbd = new Scanner(System.in);
+        List<Integer> dicesToHold = new ArrayList<>();
+        String line;
+        String[] lineVector;
+
+        line = kbd.nextLine(); //read 1,2,3
+
+        //separate all values by comma
+        lineVector = line.split(",");
+
+        for (String lineValue: lineVector) {
+            int dice = Integer.parseInt(lineValue);
+
+            dicesToHold.add(dice);
+        }
+
+        for (int value: dicesToHold) {
+            board[value-1][2] = 1;
+        }
+    }
+
 
     // Drop the dices: stop keeping them and allow them to be rolled
     public void dropDices() {
 
-        out.println("Enter the dices you want to drop (separated by comma): ");
+        out.print("Enter the dices you want to drop (separated by comma): ");
 
         Scanner kbd = new Scanner(System.in);
         List<Integer> dicesToDrop = new ArrayList<>();
@@ -195,14 +221,12 @@ public class Dices {
             dicesToDrop.add(dice);
         }
 
-        for (int i = 0; i<board.length; i++) {
-
-            if(board[i][2] == 1) { // if the dice is kept ...
-                board[i][2] = 0;
-                break;
-            }
+        for (int value: dicesToDrop) {
+            board[value-1][2] = 0;
         }
     }
+
+
 
 }
 
