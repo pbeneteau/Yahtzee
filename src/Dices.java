@@ -35,7 +35,7 @@ public class Dices {
     }
 
     // Roll dices by generating random new dices
-    public void rollDices(int roll, int round) {
+    public void rollDices() {
 
         int dices[] = getRandomDices(numberDicesReload());
 

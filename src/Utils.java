@@ -33,44 +33,52 @@ public class Utils {
         out.println(logo);
     }
 
-    // Print the game rules
-    public void showRules() {
+    void showRules () {
 
-        String rules = "\n\n1° Object of the game\n" +
-                "\n" +
-                "The object of Yahtzee is to obtain the highest score from throwing 5 dice.\n" +
-                "The game consists of 13 rounds. In each round, you roll the dice and then score the roll in one of 13 categories. You must score once in each category. The score is determined by a different rule for each category.\n" +
-                "The game ends once all 13 categories have been scored.\n" +
-                "\n" +
-                "2° Game Start\n" +
-                "\n" +
-                "To start with, roll all the dice. After rolling you can either score the current roll (see below), or re-roll any or all of the dice.\n" +
-                "" +
-                "You may only roll the dice a total of 3 times. After rolling 3 times you must choose a category to score.\n" +
-                "" +
-                "You may score the dice at any point in the round, i.e. it doesn't have to be after the 3rd roll.\n" +
-                "\n" +
-                "3° Scoring\n" +
-                "\n" +
-                "To score your combination of 5 dice, you click one of the 13 boxes, or write it on the scorecard (scoresheet). There are two sections to the score table - the Upper Section and the Lower Section.\n" +
-                "" +
-                "Once a box has been scored, it cannot be scored again for the rest of the game (except the Yahtzee category), so choose wisely.\n" +
-                "\n" +
-                "4° Upper Section Scoring\n" +
-                "\n" +
-                "If you score in the upper section of the table, your score is the total of the specified die face.\n" +
-                "So if you roll:\n" +
-                "5 - 2 - 5 - 6 - 5 and score in the Fives category, your total for the category would be 15, because there are three fives, which are added together.\n" +
-                "If the One, Three or Four Categories were selected for scoring with this roll, you would score a zero.\n" +
-                "If placed in the Two or Six category, you would score 2 and 6 respectively.\n" +
-                "\n" +
-                "Bonus If the total of Upper scores is 63 or more, add a bonus of 35. Note that 63 is the total of three each of 1s, 2s, 3s, 4s, 5s and 6s." +
-                "\n" +
-                "*: dices you kept" +
-                "\n" +
-                "x: dices you can't keep (already in the upper case)";
+        out.print("\n\n\n");
+        out.print("   THE RULES OF YAHTZEE:\n\n");
+        out.print("   The scorecard used for Yahtzee is composed of two sections. A upper       \n");
+        out.print("   section and a lower section. A total of thirteen boxes or thirteen scoring\n");
+        out.print("   combinations are divided amongst the sections. The upper section consists \n");
+        out.print("   of boxes that are scored by summing the value of the dice matching the    \n");
+        out.print("   faces of the box. If a player rolls four 3's, then the score placed in the\n");
+        out.print("   3's box is the sum of the dice which is 12. Once a player has chosen to   \n");
+        out.print("   score a box, it may not be changed and the combination is no longer in    \n");
+        out.print("   play for future rounds. If the sum of the scores in the upper section is  \n");
+        out.print("   greater than or equal to 63, then 35 more points are added to the players \n");
+        out.print("   overall score as a bonus. The lower section contains a number of poker    \n");
+        out.print("   like combinations. See the table provided below:                          \n");
+        out.print("\n\n");
 
-        out.println(rules);
+        out.print("\n\n");
+        out.print("         NAME       |           COMBINATION          |          SCORE\n");
+        out.print("   -----------------+--------------------------------+-----------------------\n");
+        out.print("   Three-of-a-kind  | Three dice with the same face  | Sum of all face values\n");
+        out.print("                    |                                |     on the 5 dice     \n");
+        out.print("   -----------------+--------------------------------+-----------------------\n");
+        out.print("   Four-of-a-kind   |  Four dice with the same face  | Sum of all face values\n");
+        out.print("                    |                                |     on the 5 dice     \n");
+        out.print("   -----------------+--------------------------------+-----------------------\n");
+        out.print("   Full house       | One pair and a three-of-a-kind |            25         \n");
+        out.print("   -----------------+--------------------------------+-----------------------\n");
+        out.print("   Small straight   |     A sequence of four dice    |            30         \n");
+        out.print("   -----------------+--------------------------------+-----------------------\n");
+        out.print("   Large straight   |     A sequence of five dice    |            40         \n");
+        out.print("   -----------------+--------------------------------+-----------------------\n");
+        out.print("\n\n");
+
+
+        out.print("\n\n");
+        out.print("         NAME       |           COMBINATION          |          SCORE\n");
+        out.print("   -----------------+--------------------------------+-----------------------\n");
+        out.print("   Yahtzee (think   |  Five dice with the same face  |            50         \n");
+        out.print("   five-of-a-kind)  |                                |                       \n");
+        out.print("   -----------------+--------------------------------+-----------------------\n");
+        out.print("   Chance           |  May be used for any sequence  | Sum of all face values\n");
+        out.print("                    | of dice; this is the catch all |       on the 5 dice   \n");
+        out.print("                    |           combination          |                       \n");
+        out.print("   -----------------+--------------------------------+-----------------------\n");
+        out.print("\n\n");
     }
 
     public void show1DArray (int[] array) {

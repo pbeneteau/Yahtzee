@@ -7,7 +7,13 @@ public class Score {
 
     private static int[][] scores;
 
+    public static int[][] getScores() {
+        return scores;
+    }
 
+    public static void setScores(int[][] scores) {
+        Score.scores = scores;
+    }
 
     // We create a score Arrays on 2 dimensions
     private static void initScores() {

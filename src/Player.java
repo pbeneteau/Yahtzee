@@ -13,7 +13,7 @@ public class Player {
     private int round;
     private String name;
 
-    Score score = new Score();
+    private Score score = new Score();
 
     public Player() {
         this.roll = 0;
@@ -43,11 +43,24 @@ public class Player {
 
     public void show() {
 
-        out.println();
+        out.println("\n\n" + this.name + "scores: ");
+        out.println("\n             ROLL:"+ this.roll + "             CATEGORY            PLAYER 1\n");
+        out.println("                          [   ] ONES                [      ]");
+        out.println("                          [   ] TWOS                [      ]");
+        out.println("                          [   ] THREES              [      ]");
+        out.println("                          [   ] FOURS               [      ]");
+        out.println("                          [   ] FIVES               [      ]");
+        out.println("                          [   ] SIXES               [      ]");
 
-        out.println(this.name + " Stats:");
+        out.println("                          [   ]  THREE OF A KIND    [      ]");
+        out.println("                          [   ]  FOUR OF A KIND     [      ]");
+        out.println("                          [   ]  FULL HOUSE(25)     [      ]");
+        out.println("                          [   ]  SMALL STRAIGHT(30) [      ]");
+        out.println("                          [   ]  LARGE STRAIGHT(40) [      ]");
+        out.println("                          [   ]  YAHTZEE!(50)       [      ]");
+        out.println("                          [   ]  CHANCE             [      ]\n\n");
 
-        out.println("stats ...\n");
+        out.println("                                TOTAL               [      ]");
     }
 
     public String getName() {
@@ -56,6 +69,14 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
     }
 }
 

@@ -3,99 +3,115 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.System.in;
-import static java.lang.System.out;
+import static java.lang.System.*;
 
 
 
 public class Main {
 
-    static Dices dices = new Dices();
-    static Utils utils = new Utils();
-    static Menu menu = new Menu();
+    private static Dices dices = new Dices();
+    private static Utils utils = new Utils();
+    private static Menu menu = new Menu();
 
     private static List<Player> players;
 
     public static void main(String[] args) {
 
-        utils.showLogo();
-        menu.showStartMenu();
+        utils.showLogo(); // show game logo
+        menu.showStartMenu(); // show start menu
 
-        int choice = utils.inputInt(1,3);
+        int choice = utils.inputInt(1,3); // get user menu choice
 
         switch (choice) {
-            case 1: initGame(); break;
-            case 2: utils.showRules(); break;
-            case 3: return;
+            case 1: initGame(); break; // init game
+            case 2: utils.showRules(); break; // show game rules
+            case 3: return; // exit
         }
 
     }
 
+    // initiate all starting/useful data to start the game
     private static void initGame() {
 
-        int playersNumber = getNumberOfPlayer();
+        int playersNumber = getNumberOfPlayer(); // ask for number of players
 
-        players = createPlayers(playersNumber);
+        players = createPlayers(playersNumber); // create players variables
 
-        getPlayersName(players);
+        getPlayersName(players); // ask player to input their name
 
-        play();
+        play(); // launch the game
     }
 
     private static void play() {
 
-        Player currentPlayer = players.get(getFirstPlayer());
+        Player currentPlayer = players.get(getFirstPlayer()); // define random first player
 
         out.println(currentPlayer.getName() + " starts first !");
 
-        dices.rollDices(currentPlayer.getRoll(), currentPlayer.getRound());
+        while (!shouldEndGame()) {
 
-        dices.show();
+            int rolls = currentPlayer.getRoll();
 
+            while (rolls % 3 == 0) { // player can rolls the dices only 3 times per round
 
+                dices.rollDices(); // roll the dices
+
+                dices.show(); // show the dices that have been rolled
+
+                currentPlayer.setRoll(rolls++); // increment rolls
+            }
+        }
     }
 
-
+    // input number of players who play
     static int getNumberOfPlayer() {
 
-        menu.showNumberOfPlayerMenu();
+        menu.showNumberOfPlayerMenu(); // show the game mode selection menu (solo or multi-player)
 
-        int choice = utils.inputInt(1,2);
+        int choice = utils.inputInt(1,2); // get input from user (from 1 to 2)
 
         if (choice > 1) {
             out.print("\nEnter the number of player: ");
-            choice = utils.inputInt(2, 10);
+            choice = utils.inputInt(2, 10); // input number of players
         }
 
         return choice;
     }
 
+    // Initialisation of players variable
     static List<Player> createPlayers(int number) {
 
-        List<Player> players = new ArrayList<>();
+        List<Player> players = new ArrayList<>(); // init array of users
 
         for (int i=0; i<number; i++) {
-            players.add(new Player());
+            players.add(new Player()); // add new empty Player variable
         }
 
         return players;
     }
 
+    // Get users names input
     static void getPlayersName(List<Player> players) {
 
         for (Player player: players) {
             out.print("Player " + (player.getId()+1) + ", enter your name: ");
             String name = utils.inputString();
             if (name != "") {
-                player.setName(name);
+                player.setName(name); // set name to Player object
             }
         }
     }
 
+    // Generate random int that define the player who start first
     static int getFirstPlayer() {
         Random rand = new Random();
         return rand.nextInt(players.size() - 1);
     }
 
+    // Check if the game must be ended or not (all player filled the tables)
+    static boolean shouldEndGame() {
+
+        return false;
+    }
 }
 
