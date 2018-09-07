@@ -5,8 +5,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.System.in;
-import static java.lang.System.out;
+import static java.lang.System.*;
+
 
 public class Dices {
 
@@ -18,6 +18,9 @@ public class Dices {
         initBoard();
     }
 
+    public int[][] getBoard() {
+        return board;
+    }
 
     // We create a score Arrays on 2 dimensions
     private void initBoard() {
@@ -32,10 +35,7 @@ public class Dices {
     }
 
     // Roll dices by generating random new dices
-    private void rollDices(int roll, int round) {
-
-        out.println("\n\n****************************** ROUND " + (round+1) + " ******************************");
-        out.println("****************************** DROP  " + (roll+1) + " ******************************\n");
+    public void rollDices(int roll, int round) {
 
         int dices[] = getRandomDices(numberDicesReload());
 
@@ -93,7 +93,7 @@ public class Dices {
     }
 
     // Makes dices as kept to ensure they won't be rolled
-    private void keepDices() {
+    public void keepDices() {
 
         for (int i=0; i<board.length; i++) {
 
@@ -109,7 +109,7 @@ public class Dices {
     }
 
     // Select Dices to keep
-    private int selectDices() {
+    public int selectDices() {
 
         int select;
 
@@ -126,7 +126,7 @@ public class Dices {
     }
 
     // Print dices that have been rolled
-    private void showDices() {
+    public void show() {
 
         String top =        " _______ ";
         String row1left =   "| o     |";
@@ -175,7 +175,7 @@ public class Dices {
 
 
     // Drop the dices: stop keeping them and allow them to be rolled
-    private void dropDices() {
+    public void dropDices() {
 
         out.println("Enter the dices you want to drop (separated by comma): ");
 
