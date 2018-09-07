@@ -1,3 +1,7 @@
+import java.util.stream.IntStream;
+import static java.lang.System.*;
+
+
 public class Score {
 
 
