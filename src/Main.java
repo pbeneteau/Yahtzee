@@ -7,7 +7,7 @@ import static java.lang.System.*;
 
 
 
-public class Main {
+public class Main implements YahtzeeConstants{
 
     private static Dices dices = new Dices();
     private static Utils utils = new Utils();
@@ -50,19 +50,34 @@ public class Main {
 
         while (!shouldEndGame()) {
 
-            int rolls = currentPlayer.getRoll();
+            int rolls = 0;
 
-            while (rolls % 3 == 0) { // player can rolls the dices only 3 times per round
+            while (rolls < 3) { // player can rolls the dices only 3 times per round
 
-                dices.rollDices(); // roll the dices
+                dices.rollDices(false); // roll the dices
 
                 dices.show(); // show the dices that have been rolled
 
-                currentPlayer.setRoll(rolls++); // increment rolls
+                rolls++; // increment rolls
 
                 dices.holdDices();
             }
+
+            int score = dices.checkPoints(currentPlayer);
+
+            dices.rollDices(true);
         }
+    }
+
+    private static int selectCategory() {
+
+        out.println("Select a category for this roll");
+
+        int e = 0;
+
+        utils.inputInt(1, 20);
+
+        return e;
     }
 
     // input number of players who play

@@ -14,6 +14,7 @@ public class Player {
     private String name;
 
     private Score score = new Score();
+    private int[] wins = new int[15];
 
     public Player() {
         this.roll = 0;
@@ -39,6 +40,14 @@ public class Player {
 
     public void setRound(int round) {
         this.round = round;
+    }
+
+    public int[] getWins() {
+        return wins;
+    }
+
+    public void setWins(int[] wins) {
+        this.wins = wins;
     }
 
     public void show() {

@@ -4,7 +4,6 @@ import static java.lang.System.*;
 
 public class Score {
 
-
     private static int[][] scores;
 
     public static int[][] getScores() {

@@ -6,6 +6,7 @@ import static java.lang.System.out;
 
 public class Utils {
 
+
     // 1. Create a Scanner using the InputStream available.
     private static Scanner scanner;
 
@@ -111,6 +112,18 @@ public class Utils {
         return input;
     }
 
+    public int getDiceIndex(int[][] board, int dice) {
+
+        for (int[] row : board) {
+            for (int value : row) {
+                if (value == dice) {
+                    return value;
+                }
+            }
+        }
+        return -1;
+    }
 
 
 }
+
