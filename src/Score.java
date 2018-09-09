@@ -36,17 +36,15 @@ public class Score {
 
         IntStream.range(0, upperSection.length).forEach(i -> {
             upperSection[i][0] = i + 1;
+            upperSection[i][1] = 0;
 
-            for (int j=1; j<upperSection[i].length - 1; j++) {
-                upperSection[i][j] = 0;
-            }
         });
 
         IntStream.range(0, lowerSection.length).forEach(i -> {
             lowerSection[i][0] = i + 1;
 
-            for (int j=1; j<upperSection[i].length - 1; j++) {
-                upperSection[i][j] = 0;
+            if (i == 5) {
+                lowerSection[i][1] = -1;
             }
         });
     }
