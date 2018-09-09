@@ -1,6 +1,5 @@
-import java.util.Random;
-import java.util.Arrays;
-import java.util.Scanner;
+
+
 
 import static java.lang.System.out;
 
@@ -44,24 +43,12 @@ public class Player {
 
     public void show() {
 
-        out.println("\n\n" + this.name + "scores: ");
-        out.println("\n             ROLL:"+ this.roll + "             CATEGORY            PLAYER 1\n");
-        out.println("                          [   ] ONES                [      ]");
-        out.println("                          [   ] TWOS                [      ]");
-        out.println("                          [   ] THREES              [      ]");
-        out.println("                          [   ] FOURS               [      ]");
-        out.println("                          [   ] FIVES               [      ]");
-        out.println("                          [   ] SIXES               [      ]");
+        out.println("\n\n-----------");
+        out.println(this.name + " score: ");
+        out.println("-----------");
+        out.println("\nROLL: "+ (this.roll+1) + "      CATEGORY             Points\n");
 
-        out.println("                          [   ]  THREE OF A KIND    [      ]");
-        out.println("                          [   ]  FOUR OF A KIND     [      ]");
-        out.println("                          [   ]  FULL HOUSE(25)     [      ]");
-        out.println("                          [   ]  SMALL STRAIGHT(30) [      ]");
-        out.println("                          [   ]  LARGE STRAIGHT(40) [      ]");
-        out.println("                          [   ]  YAHTZEE!(50)       [      ]");
-        out.println("                          [   ]  CHANCE             [      ]\n\n");
-
-        out.println("                                TOTAL               [      ]");
+        score.show();
     }
 
     public String getName() {

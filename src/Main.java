@@ -44,40 +44,73 @@ public class Main implements YahtzeeConstants{
 
     private static void play() {
 
-        Player currentPlayer = players.get(getFirstPlayer()); // define random first player
-
-        out.println(currentPlayer.getName() + " starts first !");
+        int round = 0;
 
         while (!shouldEndGame()) {
 
-            int rolls = 0;
+            out.println("\n\n-------");
+            out.println("Round " + round);
+            out.println("-------\n");
 
-            while (rolls < 3) { // player can rolls the dices only 3 times per round
+            for (Player player : players) {
 
-                dices.rollDices(false); // roll the dices
+                int rolls = 0;
+                int choice = 0;
 
-                dices.show(); // show the dices that have been rolled
+                player.setRound(round);
 
-                rolls++; // increment rolls
+                while (rolls < 3) { // player can rolls the dices only 3 times per round
 
-                dices.holdDices();
+                    player.setRoll(rolls);
+
+                    dices.rollDices(false); // roll the dices
+
+                    dices.show(); // show the dices that have been rolled
+
+                    rolls++; // increment rolls
+
+                    rollAction(player);
+                }
+
+                dices.rollDices(true);
             }
 
-            int score = dices.checkPoints(currentPlayer);
-
-            dices.rollDices(true);
+            round++;
         }
     }
 
-    private static int selectCategory() {
+    private static void rollAction(Player currentPlayer) {
 
-        out.println("Select a category for this roll");
+        if (currentPlayer.getRoll() != 2) {
 
-        int e = 0;
+            menu.showRollActionMenu(currentPlayer, false);
 
-        utils.inputInt(1, 20);
+            int choice = utils.inputInt(1, 5);
 
-        return e;
+            switch (choice) {
+                case 1: dices.holdDices(); break;
+                case 2: dices.dropDices(); break;
+                case 3: break;
+                case 4: currentPlayer.getScore().setPatternPoints(dices.getDices());
+                case 5: currentPlayer.show(); break;
+            }
+
+            if (choice == 5 || choice == 1 || choice == 2) {
+                rollAction(currentPlayer);
+            }
+        } else {
+
+            out.println("\nThis is the last roll ! \n");
+
+            menu.showRollActionMenu(currentPlayer, true);
+
+            int choice = utils.inputInt(1, 2);
+
+            switch (choice) {
+                case 1: currentPlayer.getScore().setPatternPoints(dices.getDices());
+                case 2: currentPlayer.show(); break;
+            }
+        }
     }
 
     // input number of players who play
@@ -121,42 +154,12 @@ public class Main implements YahtzeeConstants{
         }
     }
 
-    // Generate random int that define the player who start first
-    static int getFirstPlayer() {
-
-        if(players.size() == 1)
-        {
-            return 0;
-        }
-        Random rand = new Random();
-        return rand.nextInt(players.size() - 1);
-    }
-
     // Check if the game must be ended or not (all player filled the tables)
     static boolean shouldEndGame() {
 
         return false;
     }
 
-    static int GetTotalScore(int[][] upper_array, int[][] lower_array){
-        int upper_section_total = 0;
-        int lower_section_total= 0;
 
-        for(int[] row : upper_array){
-            upper_section_total += row[1];
-        }
-
-        if( upper_section_total >= 63){
-            upper_section_total +=35;
-        }
-
-        for(int[] row : lower_array){
-            lower_section_total+=row[1];
-        }
-
-        int total_score = upper_section_total+ lower_section_total;
-
-        return total_score;
-    }
 }
 

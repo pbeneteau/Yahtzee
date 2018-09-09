@@ -1,8 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
 
-import static java.lang.System.in;
-import static java.lang.System.out;
+import static java.lang.System.*;
 
 public class Utils {
 
@@ -99,16 +98,27 @@ public class Utils {
 
         scanner = new Scanner(System.in);
 
-        // Secure
-        int input = scanner.nextInt();
+        int input;
+
+        // secure input
+        do {
+            input = scanner.nextInt();
+        } while ( input <= a && input >= b);
+
         return input;
     }
 
     public String inputString() {
 
         scanner = new Scanner(System.in);
-        // Secure
-        String input = scanner.nextLine();
+
+        String input;
+
+        // secure input
+        do {
+            input = scanner.nextLine();
+        } while (input.isEmpty() );
+
         return input;
     }
 
