@@ -123,6 +123,11 @@ public class Main implements YahtzeeConstants{
 
     // Generate random int that define the player who start first
     static int getFirstPlayer() {
+
+        if(players.size() == 1)
+        {
+            return 0;
+        }
         Random rand = new Random();
         return rand.nextInt(players.size() - 1);
     }
@@ -131,6 +136,27 @@ public class Main implements YahtzeeConstants{
     static boolean shouldEndGame() {
 
         return false;
+    }
+
+    static int GetTotalScore(int[][] upper_array, int[][] lower_array){
+        int upper_section_total = 0;
+        int lower_section_total= 0;
+
+        for(int[] row : upper_array){
+            upper_section_total += row[1];
+        }
+
+        if( upper_section_total >= 63){
+            upper_section_total +=35;
+        }
+
+        for(int[] row : lower_array){
+            lower_section_total+=row[1];
+        }
+
+        int total_score = upper_section_total+ lower_section_total;
+
+        return total_score;
     }
 }
 
