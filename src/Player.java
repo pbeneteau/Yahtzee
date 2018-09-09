@@ -13,13 +13,13 @@ public class Player {
     private int round;
     private String name;
 
-    private Score score = new Score();
-    private int[] wins = new int[15];
+    private Score score;
 
     public Player() {
         this.roll = 0;
-        this.round = round;
+        this.round = 0;
         this.id = count++;
+        this.score = new Score();
     }
 
     public int getId() {
@@ -40,14 +40,6 @@ public class Player {
 
     public void setRound(int round) {
         this.round = round;
-    }
-
-    public int[] getWins() {
-        return wins;
-    }
-
-    public void setWins(int[] wins) {
-        this.wins = wins;
     }
 
     public void show() {
