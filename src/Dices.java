@@ -25,8 +25,6 @@ public class Dices implements YahtzeeConstants {
         }
     }
 
-
-
     // Roll dices by generating random new dices
     public void rollDices(boolean forceRollAll) {
 
@@ -187,7 +185,10 @@ public class Dices implements YahtzeeConstants {
 
     public int checkPoints(Player player) {
 
-        int[] wins = player.getWins();
+        Score playerScore = player.getScore();
+
+        int[][] upperSection = playerScore.getUpperSection();
+        int[][] lowerSection = playerScore.getLowerSection();
 
         int[] aDice = new int[5];
         int choice;
@@ -198,50 +199,43 @@ public class Dices implements YahtzeeConstants {
         }
 
         System.out.println("Choose your pattern: ");
-        if (wins[0] == 0) {
-            System.out.println("1 - yahtzee");
-        }
-        if (wins[1] == 0) {
+
+        System.out.println("1 - yahtzee");
+        if (lowerSection[0][2] == 0) {
             System.out.println("2 - full house");
         }
-        if (wins[2] == 0) {
-            System.out.println("3 - large straigt");
+        if (lowerSection[0][4] == 0) {
+            System.out.println("3 - large straight");
         }
-        if (wins[3] == 0) {
-            System.out.println("4 - small straigt");
+        if (lowerSection[0][3] == 0) {
+            System.out.println("4 - small straight");
         }
-        if (wins[4] == 0) {
+        if (lowerSection[0][1] == 0) {
             System.out.println("5 - four of a kind");
         }
-        if (wins[5] == 0) {
+        if (lowerSection[0][0] == 0) {
             System.out.println("6 - three of a kind");
         }
-        if (wins[6] == 0) {
-            System.out.println("7 - pair");
+        if (upperSection[0][1] == 0) {
+            System.out.println("7 - number of 1's");
         }
-        if (wins[7] == 0) {
-            System.out.println("8 - two pair");
+        if (upperSection[0][1] == 0) {
+            System.out.println("8 - number of 2's");
         }
-        if (wins[8] == 0) {
-            System.out.println("9 - number of 1's");
+        if (upperSection[0][1] == 0) {
+            System.out.println("9 - number of 3's");
         }
-        if (wins[9] == 0) {
-            System.out.println("10 - number of 2's");
+        if (upperSection[0][1] == 0) {
+            System.out.println("10 - number of 4's");
         }
-        if (wins[10] == 0) {
-            System.out.println("11 - number of 3's");
+        if (upperSection[0][1] == 0) {
+            System.out.println("11 - number of 5's");
         }
-        if (wins[11] == 0) {
-            System.out.println("12 - number of 4's");
+        if (upperSection[0][1] == 0) {
+            System.out.println("12 - number of 6's");
         }
-        if (wins[12] == 0) {
-            System.out.println("13 - number of 5's");
-        }
-        if (wins[13] == 0) {
-            System.out.println("14 - number of 6's");
-        }
-        if (wins[14] == 0) {
-            System.out.println("15 - chance");
+        if (lowerSection[0][6] == 0) {
+            System.out.println("13 - chance");
         }
 
         Utils utils = new Utils();
@@ -253,7 +247,7 @@ public class Dices implements YahtzeeConstants {
         int ones = 0, twos = 0, threes = 0, fours = 0, fives = 0, sixes = 0;
         Arrays.sort(aDice);
 
-        //Numbers
+        // Numbers
         for (y = 0; y < 5; y++) {
             if (aDice[y] == 1) {
                 ones++;
@@ -275,7 +269,7 @@ public class Dices implements YahtzeeConstants {
             }
         }
 
-        //Straights
+        // Straights
         if ((aDice[0] == aDice[1] - 1) && (aDice[1] == aDice[2] - 1)
                 && (aDice[2] == aDice[3] - 1) && (aDice[3] == aDice[4] - 1)
                 && (choice == 3)) {
@@ -313,61 +307,83 @@ public class Dices implements YahtzeeConstants {
         }
 
         if ((winingsa == 1) && (choice == 3)) {
-            System.out.println("You have a straight.");
+            System.out.println("You have a large straight.");
             score = 40;
+            lowerSection[4][1] = score;
+            return score;
         } else if ((winingsa == 2) && (choice == 4)) {
             System.out.println("You have a small straight.");
             score = 30;
+            lowerSection[3][1] = score;
+            return score;
         } else if ((winings == 10) && (choice == 1)) {
-            System.out.println("Yatzee!");
-            score = 50;
+
+            System.out.println("Yahtzee !");
+
+            if (lowerSection[5][1] == -1) {
+                score = 50;
+            } else if (lowerSection[5][1] == 0) {
+                score = 0;
+            } else {
+                score = lowerSection[5][1] + 100;
+            }
+            lowerSection[5][1] = score;
+            return score;
         } else if ((choice == 6) && (winings >= 3)) {
             System.out.println("You have three of a kind.");
             score = aDice[0] + aDice[1] + aDice[2] + aDice[3] + aDice[4];
-        } else if ((choice == 7) && (winings > 0)) {
-            System.out.println("You have a pair.");
-            score = 5;
-        } else if ((winings == 2) && (choice == 8)) {
-            System.out.println("You have two pairs.");
-            score = 10;
+            lowerSection[0][1] = score;
+            return score;
         } else if ((winings == 4) && (choice == 2)) {
             System.out.println("You have a full house.");
             score = 25;
+            lowerSection[2][1] = score;
+            return score;
         } else if ((winings >= 6) && (choice == 5)) {
             System.out.println("You have four of a kind.");
             score = aDice[0] + aDice[1] + aDice[2] + aDice[3] + aDice[4];
-        } else if (choice == 9) {
+            lowerSection[1][1] = score;
+            return score;
+        } else if (choice == 7) {
             System.out.println("You have " + ones + " ones.");
             score = ones;
-        } else if (choice == 10) {
+            upperSection[0][1] = score;
+            return score;
+        } else if (choice == 8) {
             System.out.println("You have " + twos + " twos.");
             score = twos * 2;
-        } else if (choice == 11) {
+            upperSection[1][1] = score;
+            return score;
+        } else if (choice == 9) {
             System.out.println("You have " + threes + " threes.");
             score = threes * 3;
-        } else if (choice == 12) {
+            upperSection[2][1] = score;
+            return score;
+        } else if (choice == 10) {
             System.out.println("You have " + fours + " fours.");
             score = fours * 4;
-        } else if (choice == 13) {
+            upperSection[3][1] = score;
+            return score;
+        } else if (choice == 11) {
             System.out.println("You have " + fives + " fives.");
             score = fives * 5;
-        } else if (choice == 14) {
+            upperSection[4][1] = score;
+            return score;
+        } else if (choice == 12) {
             System.out.println("You have " + sixes + " sixes.");
             score = sixes * 6;
-        } else if (choice == 15) {
+            upperSection[5][1] = score;
+            return score;
+        } else if (choice == 13) {
             score = aDice[0] + aDice[1] + aDice[2] + aDice[3] + aDice[4];
-            System.out.println("Your get " + score + " points.");
+            System.out.println("Your get " + score + " points with the chance.");
+            lowerSection[6][1] = score;
+            return score;
         } else {
             System.out.println("You got nothing.");
             score = 0;
+            return score;
         }
-
-        if (score != 0) {
-            wins[choice - 1] = 1;
-            player.setWins(wins);
-        }
-
-        return score;
     }
 
 
