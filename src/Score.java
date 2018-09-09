@@ -33,48 +33,49 @@ public class Score {
 
     private void initSections() {
 
-        upperSection = new int[6][2];
-        lowerSection = new int[7][2];
+        upperSection = new int[6][3];
+        lowerSection = new int[7][3];
 
         IntStream.range(0, upperSection.length).forEach(i -> {
             upperSection[i][0] = i + 1;
             upperSection[i][1] = 0;
-
+            upperSection[i][2] = 0;
         });
 
         IntStream.range(0, lowerSection.length).forEach(i -> {
             lowerSection[i][0] = i + 1;
-
-            if (i == 5) {
-                lowerSection[i][1] = -1;
-            }
+            lowerSection[i][1] = 0;
+            lowerSection[i][2] = 0;
         });
     }
 
     public void show() {
 
-        out.println("             ONES                 [ " + upperSection[0][1] + " ]");
-        out.println("             TWOS                 [ " + upperSection[1][1] + " ]");
-        out.println("             THREES               [ " + upperSection[2][1] + " ]");
-        out.println("             FOURS                [ " + upperSection[3][1] + " ]");
-        out.println("             FIVES                [ " + upperSection[4][1] + " ]");
-        out.println("             SIXES                [ " + upperSection[5][1] + " ]");
+                out.println("             [ " + patternAvaible(upperSection[0][2]) + " ] ONES                  [ " + upperSection[0][1] + " ]");
+                out.println("             [ " + patternAvaible(upperSection[1][2]) + " ] TWOS                  [ " + upperSection[1][1] + " ]");
+                out.println("             [ " + patternAvaible(upperSection[2][2]) + " ] THREES                [ " + upperSection[2][1] + " ]");
+                out.println("             [ " + patternAvaible(upperSection[3][2]) + " ] FOURS                 [ " + upperSection[3][1] + " ]");
+                out.println("             [ " + patternAvaible(upperSection[4][2]) + " ] FIVES                 [ " + upperSection[4][1] + " ]");
+                out.println("             [ " + patternAvaible(upperSection[5][2]) + " ] SIXES                 [ " + upperSection[5][1] + " ]");
 
-        out.println("             THREE OF A KIND      [ " + lowerSection[0][1] + " ]");
-        out.println("             FOUR OF A KIND       [ " + lowerSection[1][1] + " ]");
-        out.println("             FULL HOUSE (25)      [ " + lowerSection[2][1] + " ]");
-        out.println("             SMALL STRAIGHT (30)  [ " + lowerSection[3][1] + " ]");
-        out.println("             LARGE STRAIGHT (40)  [ " + lowerSection[4][1] + " ]");
-        if (lowerSection[5][1] == -1) {
-            out.println("             YAHTZEE! (50)        [ " + 0 + " ]");
-        } else {
-            out.println("             YAHTZEE! (50)        [ " + lowerSection[5][1] + " ]");
-        }
-        out.println("             CHANCE               [ " + lowerSection[6][1] + " ]\n\n");
+                out.println("             [ " + patternAvaible(lowerSection[0][2]) + " ] THREE OF A KIND       [ " + lowerSection[0][1] + " ]");
+                out.println("             [ " + patternAvaible(lowerSection[1][2]) + " ] FOUR OF A KIND        [ " + lowerSection[1][1] + " ]");
+                out.println("             [ " + patternAvaible(lowerSection[2][2]) + " ] FULL HOUSE (25)       [ " + lowerSection[2][1] + " ]");
+                out.println("             [ " + patternAvaible(lowerSection[3][2]) + " ] SMALL STRAIGHT (30)   [ " + lowerSection[3][1] + " ]");
+                out.println("             [ " + patternAvaible(lowerSection[4][2]) + " ] LARGE STRAIGHT (40)   [ " + lowerSection[4][1] + " ]");
+                out.println("             [ " + patternAvaible(lowerSection[5][2]) + " ] YAHTZEE! (50)         [ " + lowerSection[5][1] + " ]");
 
-        out.println("             TOTAL                [ " + getTotalScore() + " ]\n");
+                out.println("             [ " + patternAvaible(lowerSection[6][2]) + " ] CHANCE                [ " + lowerSection[6][1] + " ]\n\n");
+
+                out.println("             TOTAL                       [ " + getTotalScore() + " ]\n");
     }
 
+    private String patternAvaible(int value) {
+
+            if (value == 1) {
+                return "X";
+            } else { return " "; }
+        }
 
     private int getTotalScore() {
 
@@ -230,78 +231,92 @@ public class Score {
             }
         }
 
+
         if ((winingsa == 1) && (choice == 3)) {
             System.out.print("You have a large straight.");
             score = 40;
             lowerSection[4][1] = score;
+            lowerSection[4][2] = 1;
             return score;
         } else if ((winingsa == 2) && (choice == 4)) {
             System.out.print("You have a small straight.");
             score = 30;
             lowerSection[3][1] = score;
+            lowerSection[3][2] = 1;
             return score;
         } else if ((winings == 10) && (choice == 1)) {
 
             System.out.print("Yahtzee !");
 
-            if (lowerSection[5][1] == -1) {
+            if (lowerSection[5][2] == 0) {
                 score = 50;
-            } else if (lowerSection[5][1] == 0) {
+            } else if (lowerSection[5][2] == 1 && lowerSection[5][1] == 0) {
                 score = 0;
             } else {
                 score = lowerSection[5][1] + 100;
             }
             lowerSection[5][1] = score;
+            lowerSection[5][2] = 1;
             return score;
         } else if ((choice == 6) && (winings >= 3)) {
             System.out.print("You have three of a kind.");
             score = aDice[0] + aDice[1] + aDice[2] + aDice[3] + aDice[4];
             lowerSection[0][1] = score;
+            lowerSection[0][2] = 1;
             return score;
         } else if ((winings == 4) && (choice == 2)) {
             System.out.print("You have a full house.");
             score = 25;
             lowerSection[2][1] = score;
+            lowerSection[2][2] = 1;
             return score;
         } else if ((winings >= 6) && (choice == 5)) {
             System.out.print("You have four of a kind.");
             score = aDice[0] + aDice[1] + aDice[2] + aDice[3] + aDice[4];
             lowerSection[1][1] = score;
+            lowerSection[1][2] = 1;
             return score;
         } else if (choice == 7) {
             System.out.print("You have " + ones + " ones.");
             score = ones;
             upperSection[0][1] = score;
+            upperSection[0][2] = 1;
             return score;
         } else if (choice == 8) {
             System.out.print("You have " + twos + " twos.");
             score = twos * 2;
             upperSection[1][1] = score;
+            upperSection[1][2] = 1;
             return score;
         } else if (choice == 9) {
             System.out.print("You have " + threes + " threes.");
             score = threes * 3;
             upperSection[2][1] = score;
+            upperSection[2][2] = 1;
             return score;
         } else if (choice == 10) {
             System.out.print("You have " + fours + " fours.");
             score = fours * 4;
             upperSection[3][1] = score;
+            upperSection[3][2] = 1;
             return score;
         } else if (choice == 11) {
             System.out.print("You have " + fives + " fives.");
             score = fives * 5;
             upperSection[4][1] = score;
+            upperSection[4][2] = 1;
             return score;
         } else if (choice == 12) {
             System.out.print("You have " + sixes + " sixes.");
             score = sixes * 6;
             upperSection[5][1] = score;
+            upperSection[5][2] = 1;
             return score;
         } else if (choice == 13) {
             score = aDice[0] + aDice[1] + aDice[2] + aDice[3] + aDice[4];
             System.out.print("Your get " + score + " points with the chance.");
             lowerSection[6][1] = score;
+            lowerSection[6][2] = 1;
             return score;
         } else {
             System.out.print("You got nothing.");

@@ -45,8 +45,6 @@ public class Dices implements YahtzeeConstants {
         }
 
         Collections.sort(dices);
-
-        out.println("\nThe dices have been rolled !\n");
     }
 
     // Create random numbers dices between 1-6

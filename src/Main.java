@@ -1,4 +1,5 @@
 
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,7 +8,8 @@ import static java.lang.System.*;
 
 
 
-public class Main implements YahtzeeConstants{
+
+public class Main implements YahtzeeConstants {
 
     private static Dices dices = new Dices();
     private static Utils utils = new Utils();
@@ -15,17 +17,23 @@ public class Main implements YahtzeeConstants{
 
     private static List<Player> players;
 
+
     public static void main(String[] args) {
 
         utils.showLogo(); // show game logo
         menu.showStartMenu(); // show start menu
 
-        int choice = utils.inputInt(1,3); // get user menu choice
+        int choice = utils.inputInt(1, 3); // get user menu choice
 
         switch (choice) {
-            case 1: initGame(); break; // init game
-            case 2: utils.showRules(); break; // show game rules
-            case 3: return; // exit
+            case 1:
+                initGame();
+                break; // init game
+            case 2:
+                utils.showRules();
+                break; // show game rules
+            case 3:
+                return; // exit
         }
 
     }
@@ -48,7 +56,7 @@ public class Main implements YahtzeeConstants{
 
         while (!shouldEndGame()) {
 
-            out.println("\n\n-------");
+            out.println("\n-------");
             out.println("Round " + round);
             out.println("-------\n");
 
@@ -69,7 +77,9 @@ public class Main implements YahtzeeConstants{
 
                     rolls++; // increment rolls
 
-                    rollAction(player);
+                    choice = rollAction(player);
+
+                    if (choice == 4) { break; }
                 }
 
                 dices.rollDices(true);
@@ -79,7 +89,7 @@ public class Main implements YahtzeeConstants{
         }
     }
 
-    private static void rollAction(Player currentPlayer) {
+    private static int rollAction(Player currentPlayer) {
 
         if (currentPlayer.getRoll() != 2) {
 
@@ -88,16 +98,25 @@ public class Main implements YahtzeeConstants{
             int choice = utils.inputInt(1, 5);
 
             switch (choice) {
-                case 1: dices.holdDices(); break;
-                case 2: dices.dropDices(); break;
-                case 3: break;
-                case 4: currentPlayer.getScore().setPatternPoints(dices.getDices());
-                case 5: currentPlayer.show(); break;
+                case 1:
+                    dices.holdDices();
+                    break;
+                case 2:
+                    dices.dropDices();
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    currentPlayer.getScore().setPatternPoints(dices.getDices());
+                case 5:
+                    currentPlayer.show();
+                    break;
             }
 
             if (choice == 5 || choice == 1 || choice == 2) {
-                rollAction(currentPlayer);
+                return rollAction(currentPlayer);
             }
+            return choice;
         } else {
 
             out.println("\nThis is the last roll ! \n");
@@ -107,9 +126,13 @@ public class Main implements YahtzeeConstants{
             int choice = utils.inputInt(1, 2);
 
             switch (choice) {
-                case 1: currentPlayer.getScore().setPatternPoints(dices.getDices());
-                case 2: currentPlayer.show(); break;
+                case 1:
+                    currentPlayer.getScore().setPatternPoints(dices.getDices());
+                case 2:
+                    currentPlayer.show();
+                    break;
             }
+            return choice;
         }
     }
 
@@ -118,7 +141,7 @@ public class Main implements YahtzeeConstants{
 
         menu.showNumberOfPlayerMenu(); // show the game mode selection menu (solo or multi-player)
 
-        int choice = utils.inputInt(1,2); // get input from user (from 1 to 2)
+        int choice = utils.inputInt(1, 2); // get input from user (from 1 to 2)
 
         if (choice > 1) {
             out.print("\nEnter the number of player: ");
@@ -133,7 +156,7 @@ public class Main implements YahtzeeConstants{
 
         List<Player> players = new ArrayList<>(); // init array of users
 
-        for (int i=0; i<number; i++) {
+        for (int i = 0; i < number; i++) {
             players.add(new Player()); // add new empty Player variable
         }
 
@@ -145,8 +168,8 @@ public class Main implements YahtzeeConstants{
 
         out.println();
 
-        for (Player player: players) {
-            out.print("Player " + (player.getId()+1) + ", enter your name: ");
+        for (Player player : players) {
+            out.print("Player " + (player.getId() + 1) + ", enter your name: ");
             String name = utils.inputString();
             if (name != "") {
                 player.setName(name); // set name to Player object
@@ -157,9 +180,22 @@ public class Main implements YahtzeeConstants{
     // Check if the game must be ended or not (all player filled the tables)
     static boolean shouldEndGame() {
 
-        return false;
+        for (Player player : players) {
+
+            for (int i = 0; i < player.getScore().getUpperSection().length; i++) {
+
+                if (player.getScore().getUpperSection()[i][2] != 1) {
+                    return false;
+                }
+            }
+            for (int i = 0; i < player.getScore().getLowerSection().length; i++) {
+                if (player.getScore().getLowerSection()[i][2] != 1) {
+                    return false;
+                }
+            }
+
+        }
+        return true;
     }
-
-
 }
 

@@ -46,7 +46,7 @@ public class Player {
         out.println("\n\n-----------");
         out.println(this.name + " score: ");
         out.println("-----------");
-        out.println("\nROLL: "+ (this.roll+1) + "      CATEGORY             Points\n");
+        out.println("\nROLL: "+ (this.roll+1) + "      CATEGORY                  Points\n");
 
         score.show();
     }
