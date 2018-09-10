@@ -9,7 +9,7 @@ import static java.lang.System.*;
 
 
 
-public class Main implements YahtzeeConstants {
+public class Main  {
 
     private static Dices dices = new Dices();
     private static Utils utils = new Utils();
@@ -31,6 +31,7 @@ public class Main implements YahtzeeConstants {
                 break; // init game
             case 2:
                 utils.showRules();
+                initGame();
                 break; // show game rules
             case 3:
                 return; // exit

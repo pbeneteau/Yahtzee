@@ -3,7 +3,6 @@
 
 public class Dice implements Comparable<Dice>{
 
-
     private int value;
     private boolean dropped;
 
@@ -11,7 +10,6 @@ public class Dice implements Comparable<Dice>{
         this.dropped = dropped;
         this.value = value;
     }
-
 
     public int getValue() {
         return value;

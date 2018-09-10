@@ -96,15 +96,22 @@ public class Utils {
 
     public int inputInt(int a, int b) {
 
+        int input = 0;
         scanner = new Scanner(System.in);
-
-        int input;
 
         // secure input
         do {
-            input = scanner.nextInt();
-        } while ( input <= a && input >= b);
+            try {
+                out.print("\nChoice: ");
+                input = scanner.nextInt();
 
+            } catch(Exception e)
+            {
+                input = 0;
+                scanner.nextLine();
+                out.println("Incorrect Input: " + e);
+            }
+        } while ( input < a || input > b);
         return input;
     }
 
@@ -116,8 +123,9 @@ public class Utils {
 
         // secure input
         do {
-            input = scanner.nextLine();
-        } while (input.isEmpty() );
+                input = scanner.nextLine();
+
+        } while (input.isEmpty());
 
         return input;
     }

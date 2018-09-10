@@ -1,31 +1,32 @@
 
 import static java.lang.System.*;
+import java.util.Scanner;
 
 public class Menu {
 
 
     public void showStartMenu() {
 
-        // Display menu graphics
-        out.println("\n\t\t\t\t\t============================");
-        out.println("\t\t\t\t\t|           START          |");
-        out.println("\t\t\t\t\t============================");
-        out.println("\t\t\t\t\t| 1. Play                  |");
-        out.println("\t\t\t\t\t| 2. Rules                 |");
-        out.println("\t\t\t\t\t| 3. Exit                  |");
-        out.println("\t\t\t\t\t============================");
 
-        out.print("\nChoice: ");
+        // Display menu graphics
+            out.println("\n\t\t\t\t\t============================");
+            out.println("\t\t\t\t\t|           START          |");
+            out.println("\t\t\t\t\t============================");
+            out.println("\t\t\t\t\t| 1. Play                  |");
+            out.println("\t\t\t\t\t| 2. Rules                 |");
+            out.println("\t\t\t\t\t| 3. Exit                  |");
+            out.println("\t\t\t\t\t============================");
+
+
     }
 
     public void showNumberOfPlayerMenu() {
 
-        out.println("\nGame Mode");
+            out.println("\nGame Mode");
 
-        out.println("1. Solo");
-        out.println("2. Multi-player");
+            out.println("1. Solo");
+            out.println("2. Multi-player");
 
-        out.print("\nChoice: ");
     }
 
     public void showRollActionMenu(Player player, boolean lastRoll) {
@@ -47,6 +48,5 @@ public class Menu {
             out.println("2. Show points");
         }
 
-        out.print("\nChoice: ");
     }
 }

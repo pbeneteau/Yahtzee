@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import static java.lang.System.*;
 
 
-public class Dices implements YahtzeeConstants {
+public class Dices {
 
 
     private List<Dice> dices = new ArrayList<>();
