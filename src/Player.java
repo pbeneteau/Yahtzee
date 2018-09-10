@@ -65,9 +65,9 @@ public class Player {
     // This method show the score of each player, the roll and category points
     public void show() {
 
-        out.println("\n\n-----------");
-        out.println(this.name + " score: ");
-        out.println("-----------");
+        out.println("\n\n------------");
+        out.println(this.name + "'s score ");
+        out.println("------------");
         out.println("\nROLL: "+ (this.roll+1) + "      CATEGORY                  Points\n");
 
         score.show();
