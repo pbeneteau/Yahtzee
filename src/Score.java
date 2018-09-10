@@ -9,6 +9,16 @@ public class Score {
     private int[][] upperSection; // array of score in phase 1
     private int[][] lowerSection; // array of score in phase 2
 
+    private int totalPoints;
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+
     public Score() {
         initSections();
     }

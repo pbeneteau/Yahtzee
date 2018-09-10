@@ -7,8 +7,6 @@ import java.util.Random;
 import static java.lang.System.*;
 
 
-
-
 public class Main  {
 
     private static Dices dices = new Dices();
@@ -34,6 +32,7 @@ public class Main  {
                 initGame();
                 break; // show game rules
             case 3:
+                out.println("\nThanks for playing Yahtzee! Goodbye.");
                 return; // exit
         }
 
@@ -88,6 +87,10 @@ public class Main  {
 
             round++;
         }
+
+        Player winner = getwinner();
+
+        out.println(winner.getName() + "won the game with "+ winner.getScore().getTotalPoints() + " !");
     }
 
     private static int rollAction(Player currentPlayer) {
@@ -98,7 +101,7 @@ public class Main  {
 
             int choice = utils.inputInt(1, 5);
 
-            switch (choice) {
+            switch (choice) { // handle user choice
                 case 1:
                     dices.holdDices();
                     break;
@@ -158,6 +161,7 @@ public class Main  {
         List<Player> players = new ArrayList<>(); // init array of users
 
         for (int i = 0; i < number; i++) {
+
             players.add(new Player()); // add new empty Player variable
         }
 
@@ -170,6 +174,7 @@ public class Main  {
         out.println();
 
         for (Player player : players) {
+
             out.print("Player " + (player.getId() + 1) + ", enter your name: ");
             String name = utils.inputString();
             if (name != "") {
@@ -198,5 +203,33 @@ public class Main  {
         }
         return true;
     }
+
+    // Return the winenr of the game (most points)
+    static Player getwinner() {
+
+        int totalPoints = 0;
+        Player winner = new Player();
+
+        for (Player player: players) {
+
+            if (player.getScore().getTotalPoints() > totalPoints) {
+
+                totalPoints = player.getScore().getTotalPoints();
+                winner = player;
+            }
+        }
+
+        return winner;
+    }
 }
 
+
+/*
+Ideas and enhancement
+
+Playing on a log console is very tricky. To enhance the game we could create a graphic interface to improve the usability of the game.
+We also could review the code to make it more clear and improve the algorithm efficiency.
+
+
+Moreover, some features could be added to the game like a points prediction: points would be automatically calculated before the user select his pattern. That would prevent the user next score to ensure that he makes the right choice. In addition, we could create an IA that plays against the user, with different levels of difficulty.
+ */
