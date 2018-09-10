@@ -88,7 +88,7 @@ public class Main  {
             round++;
         }
 
-        Player winner = getwinner();
+        Player winner = getWinner();
 
         out.println(winner.getName() + "won the game with "+ winner.getScore().getTotalPoints() + " !");
     }
@@ -204,8 +204,8 @@ public class Main  {
         return true;
     }
 
-    // Return the winenr of the game (most points)
-    static Player getwinner() {
+    // Return the winner of the game (most points)
+   private static Player getWinner() {
 
         int totalPoints = 0;
         Player winner = new Player();
