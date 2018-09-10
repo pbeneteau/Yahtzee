@@ -185,11 +185,11 @@ public class Main  {
 
             for (int i = 0; i < player.getScore().getUpperSection().length; i++) {
 
-                if (player.getScore().getUpperSection()[i][2] != 1) {
+                if (player.getScore().getUpperSection()[i][2] != 1) { // if score in upper array are not all add
                     return false;
                 }
             }
-            for (int i = 0; i < player.getScore().getLowerSection().length; i++) {
+            for (int i = 0; i < player.getScore().getLowerSection().length; i++) { // and score in lower array are not all add
                 if (player.getScore().getLowerSection()[i][2] != 1) {
                     return false;
                 }

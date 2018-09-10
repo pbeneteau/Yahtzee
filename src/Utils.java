@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 import static java.lang.System.*;
 
+ /** This class is utilities class like rules or method we use frequently
+         */
 public class Utils {
 
 
@@ -32,7 +34,7 @@ public class Utils {
 
         out.println(logo);
     }
-
+    // Print the rules of the game Yahtzee
     void showRules () {
 
         out.print("\n\n\n");
@@ -94,6 +96,10 @@ public class Utils {
         }
     }
 
+     /**This method is used when we ask some question in menu and permit to input some int choice
+      * @param a and @param b are the bounds of possibility in menu
+     @return choice of player
+     */
     public int inputInt(int a, int b) {
 
         int input = 0;
@@ -115,6 +121,7 @@ public class Utils {
         return input;
     }
 
+    /** This method permit to input some string choice */
     public String inputString() {
 
         scanner = new Scanner(System.in);
@@ -130,6 +137,10 @@ public class Utils {
         return input;
     }
 
+     /**This method cross the array for each value and return index of the dice
+      * @param board is a array of dice and the number of dice we search the index
+      @return value of index dice or -1 if dice isn't in the array
+      */
     public int getDiceIndex(int[][] board, int dice) {
 
         for (int[] row : board) {

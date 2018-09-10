@@ -6,8 +6,8 @@ import static java.lang.System.*;
 
 public class Score {
 
-    private int[][] upperSection;
-    private int[][] lowerSection;
+    private int[][] upperSection; // array of score in phase 1
+    private int[][] lowerSection; // array of score in phase 2
 
     public Score() {
         initSections();
@@ -33,22 +33,25 @@ public class Score {
 
     private void initSections() {
 
-        upperSection = new int[6][3];
-        lowerSection = new int[7][3];
+        upperSection = new int[6][3]; // create size of the upper array
+        lowerSection = new int[7][3]; // create size of the lower array
 
         IntStream.range(0, upperSection.length).forEach(i -> {
-            upperSection[i][0] = i + 1;
-            upperSection[i][1] = 0;
-            upperSection[i][2] = 0;
+            upperSection[i][0] = i + 1; // number of dices
+            upperSection[i][1] = 0; // number of points
+            upperSection[i][2] = 0; // if point are select
         });
 
         IntStream.range(0, lowerSection.length).forEach(i -> {
             lowerSection[i][0] = i + 1;
-            lowerSection[i][1] = 0;
-            lowerSection[i][2] = 0;
+            lowerSection[i][1] = 0; // number of points
+            lowerSection[i][2] = 0; // if point are select
         });
     }
 
+    /**This method print the score array with different possibility of point
+
+     */
     public void show() {
 
                 out.println("             [ " + patternAvaible(upperSection[0][2]) + " ] ONES                  [ " + upperSection[0][1] + " ]");
@@ -70,6 +73,10 @@ public class Score {
                 out.println("             TOTAL                       [ " + getTotalScore() + " ]\n");
     }
 
+    /**This method put X or nothing if player had selected a pattern
+     * @param value is in score array to know if score are already in pattern
+     @return X for the pattern is select and nothing if is not select
+     */
     private String patternAvaible(int value) {
 
             if (value == 1) {
@@ -77,6 +84,8 @@ public class Score {
             } else { return " "; }
         }
 
+    /**This method calculate the Score total of each player
+     */
     private int getTotalScore() {
 
         int upper_section_total = 0;
@@ -86,14 +95,14 @@ public class Score {
             upper_section_total += row[1];
         }
 
-        if (upper_section_total >= 63) upper_section_total += 35;
+        if (upper_section_total >= 63) upper_section_total += 35; // +35 bonus if upper section score > 63
 
         for (int[] row : lowerSection) {
 
             if (row[1] != -1) { lower_section_total += row[1]; }
         }
 
-        return upper_section_total + lower_section_total;
+        return upper_section_total + lower_section_total; // we addition lower score array and upper score array to have total score
     }
 
     public void setPatternPoints(List<Dice> dices) {
@@ -104,7 +113,8 @@ public class Score {
 
         out.println(" You earned " + points + " points !");
     }
-
+    /**This method permit to choose pattern with different possibility
+     */
     public int getUserPatternChoice() {
 
         int choice;
@@ -156,6 +166,10 @@ public class Score {
 
         return choice;
     }
+    /**This method calculated and put point in score array in function of the pattern choice and dices on the table
+     * @param dices is list of dices who are on the table and choice is the number of pattern selected
+     @return point in score arrays
+     */
 
     public int getPatternPoints(List<Dice> dices, int choice) {
 
@@ -169,10 +183,10 @@ public class Score {
         }
 
         int x, y, winings = 0, winingsa = 0;
-        int ones = 0, twos = 0, threes = 0, fours = 0, fives = 0, sixes = 0;
-        Arrays.sort(aDice);
+        int ones = 0, twos = 0, threes = 0, fours = 0, fives = 0, sixes = 0; //numbers of dices
+        Arrays.sort(aDice); // we sort dices
 
-        // Numbers
+        // Numbers of upper section phase 1 groupe of numbers
         for (y = 0; y < 5; y++) {
             if (aDice[y] == 1) {
                 ones++;
@@ -231,6 +245,8 @@ public class Score {
             }
         }
 
+        //  we calculate score of different pattern and put it ine the array score
+        // also put 1 in third column of the arrazy to know the pattern has been selected
 
         if ((winingsa == 1) && (choice == 3)) {
             System.out.print("You have a large straight.");

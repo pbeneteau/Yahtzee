@@ -20,7 +20,7 @@ public class Player {
         this.id = count++;
         this.score = new Score();
     }
-
+// getters and setters to have numbers of rolls and round during the game
     public int getId() {
         return id;
     }
@@ -41,6 +41,8 @@ public class Player {
         this.round = round;
     }
 
+    /**This method show the score of each player, the roll and category poinys
+     */
     public void show() {
 
         out.println("\n\n-----------");
@@ -51,6 +53,7 @@ public class Player {
         score.show();
     }
 
+    // getters and setters to have name of player and score
     public String getName() {
         return name;
     }

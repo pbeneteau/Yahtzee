@@ -16,7 +16,7 @@ public class Dices {
         initDices();
     }
 
-
+// to initialize dices on table
     private void initDices() {
 
         for (int i=0; i<5; i++) {
@@ -69,6 +69,7 @@ public class Dices {
         String frozen =     "    *    ";
         String space =      "         ";
 
+        // different print pattern for different number of dices
         String[] dice1 = {top, row0, row1Mid, row0, bot, space};
         String[] dice2 = {top, row1Right, row0, row1left, bot, space};
         String[] dice3 = {top, row1Right, row1Mid, row1left, bot, space};
@@ -175,7 +176,7 @@ public class Dices {
 
     public List<Dice> getDices() {
         return dices;
-    }
+    } // getters to have list of dices
 
 
 

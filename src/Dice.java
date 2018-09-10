@@ -10,6 +10,7 @@ public class Dice implements Comparable<Dice>{
         this.dropped = dropped;
         this.value = value;
     }
+    // getters and setters to have values of dices and dices drop and to comapre value
 
     public int getValue() {
         return value;
