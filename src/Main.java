@@ -1,3 +1,4 @@
+/* Marc-Antoine Bock && Paul Bénéteau Project Java Second Milestone */
 
 import javax.print.DocFlavor;
 import java.util.ArrayList;
@@ -148,7 +149,7 @@ public class Main  {
         int choice = utils.inputInt(1, 2); // get input from user (from 1 to 2)
 
         if (choice > 1) {
-            out.print("\nEnter the number of player: ");
+            out.print("\nEnter the number of player (10 max): ");
             choice = utils.inputInt(2, 10); // input number of players
         }
 
